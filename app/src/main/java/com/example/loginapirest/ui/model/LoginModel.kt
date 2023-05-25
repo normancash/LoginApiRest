@@ -1,13 +1,17 @@
 package com.example.loginapirest.ui.model
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
 import com.example.loginapirest.ui.repository.RepositoryUser
 import com.example.loginapirest.ui.response.LoginResponse
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 
 class LoginModel : ViewModel() {
@@ -15,9 +19,35 @@ class LoginModel : ViewModel() {
     var password by mutableStateOf("")
 
 
-    fun onSummit(context : Context) : LoginResponse {
-        Log.d("Valores","Valor name:$name, valor Password: $password")
-        val repository = RepositoryUser()
-        return repository.fetchData(context,name,password);
+    var _state = MutableStateFlow(UIState())
+    val state : StateFlow<UIState> = _state.asStateFlow()
+
+
+    val repository = RepositoryUser()
+
+    data class UIState(
+        val _loading: Boolean = false,
+        val loginResponse: LoginResponse = LoginResponse()
+    )
+
+
+    fun onSummit()  {
+        viewModelScope.launch {
+           /* _state.copy( _loading = true)
+            _state.copy(loginResponse = repository.fetchData(name,password).getOrDefault(LoginResponse()))
+            _state.copy(_loading = false)*/
+
+
+
+
+
+            _state.update { it.copy(_loading = true) }
+            val login = repository.fetchData(name,password).getOrDefault(LoginResponse())
+            _state.update{it.copy(loginResponse = login)}
+            _state.update { it.copy(_loading = false) }
+
+        }
     }
+
+
 }
