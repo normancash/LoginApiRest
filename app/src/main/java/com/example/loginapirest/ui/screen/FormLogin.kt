@@ -3,6 +3,7 @@ package com.example.loginapirest.ui.screen
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,12 +33,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.loginapirest.ListLibroScreen
 import com.example.loginapirest.R
 import com.example.loginapirest.ui.activity.SimpleAlertDialog
 import com.example.loginapirest.ui.model.LoginModel
-import com.example.loginapirest.ui.navigate.Screen
+import com.example.loginapirest.ui.navigate.AppScreen
 
 @Composable
 fun Circular() {
@@ -99,14 +100,15 @@ fun Boton(loginModel: LoginModel) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormLogin(loginModel: LoginModel, navController: NavHostController){
+fun FormLogin(navController: NavHostController){
     //val state = loginModel._state
+    val loginModel : LoginModel = viewModel()
     val context = LocalContext.current
     val state by loginModel._state.collectAsState()
     val isLoading = remember { mutableStateOf(false) }
     val isSuccess = remember{ mutableStateOf(false) }
     var show by rememberSaveable { mutableStateOf(false) }
-    Toast.makeText(context,"Prueba", Toast.LENGTH_LONG)
+
     LaunchedEffect(state) {
         isLoading.value = state._loading
         Log.d("LOADING",isLoading.toString())
@@ -115,13 +117,18 @@ fun FormLogin(loginModel: LoginModel, navController: NavHostController){
     }
 
     if (isLoading.value) {
-        CircularProgressIndicator()
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            CircularProgressIndicator()
+        }
     }
     if (isSuccess.value) {
         Log.d("BIENVENIDO","Bienvenido $loginModel.name")
         //show = true
         SimpleAlertDialog("Bienvenido","Bienvenido $loginModel.name.value") {
-            navController.navigate(route = Screen.ListLibroScreen.route)
+            navController.navigate(route = AppScreen.ListLibroScreen.route)
         }
     }
     Column(

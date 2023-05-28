@@ -15,8 +15,9 @@ import com.example.loginapirest.ui.theme.LoginApiRestTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.loginapirest.ui.navigate.AppNavigate
 
-import com.example.loginapirest.ui.navigate.Screen
+import com.example.loginapirest.ui.navigate.AppScreen
 import com.example.loginapirest.ui.screen.FormLogin
 
 
@@ -34,19 +35,7 @@ class MainActivity(): ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   val navController = rememberNavController()
-                   NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
-                        composable(route= Screen.MainScreen.route) {
-                            MainActivity();
-                        }
-                        composable(route= Screen.ListLibroScreen.route){
-                            ListLibroScreen(navController);
-                        }
-                        composable(route= Screen.DetailLibroScreen.route){}
-
-                   }
-                   FormLogin(loginModel,navController)
-
+                    AppNavigate()
                 }
             }
         }
