@@ -1,7 +1,6 @@
 package com.example.loginapirest.ui.screen
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,7 +36,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.loginapirest.R
 import com.example.loginapirest.ui.activity.SimpleAlertDialog
-import com.example.loginapirest.ui.model.LoginModel
+import com.example.loginapirest.ui.viewmodel.LoginModel
 import com.example.loginapirest.ui.navigate.AppScreen
 
 @Composable

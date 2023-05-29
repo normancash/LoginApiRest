@@ -10,15 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.loginapirest.ui.model.LoginModel
+import com.example.loginapirest.ui.viewmodel.LoginModel
 import com.example.loginapirest.ui.theme.LoginApiRestTheme
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.loginapirest.ui.navigate.AppNavigate
-
-import com.example.loginapirest.ui.navigate.AppScreen
-import com.example.loginapirest.ui.screen.FormLogin
 
 
 class MainActivity(): ComponentActivity() {

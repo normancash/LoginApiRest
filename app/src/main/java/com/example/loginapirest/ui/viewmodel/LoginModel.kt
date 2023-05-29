@@ -1,4 +1,4 @@
-package com.example.loginapirest.ui.model
+package com.example.loginapirest.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,14 +33,6 @@ class LoginModel : ViewModel() {
 
     fun onSummit()  {
         viewModelScope.launch {
-           /* _state.copy( _loading = true)
-            _state.copy(loginResponse = repository.fetchData(name,password).getOrDefault(LoginResponse()))
-            _state.copy(_loading = false)*/
-
-
-
-
-
             _state.update { it.copy(_loading = true) }
             val login = repository.fetchData(name,password).getOrDefault(LoginResponse())
             _state.update{it.copy(loginResponse = login)}
