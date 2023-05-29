@@ -1,5 +1,6 @@
 package com.example.loginapirest.ui.navigate
 
+import android.telecom.Call.Details
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,7 +19,9 @@ fun AppNavigate() {
         composable(route= AppScreen.ListLibroScreen.route){
             ListLibroScreen(navController);
         }
-       // composable(route= AppScreen.DetailLibroScreen.route){}
+        /*composable(route= AppScreen.DetailLibroScreen.route){
+            AppScreen.DetailLibroScreen(navController)
+        }*/
 
     }
 }

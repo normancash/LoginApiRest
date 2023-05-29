@@ -16,27 +16,17 @@ import kotlinx.coroutines.launch
 
 class LibroViewModel : ViewModel() {
     val libroRepository : RepositoryLibro = RepositoryLibro()
-    /*var _state = MutableStateFlow(UIState())
-    var state : StateFlow<UIState> = _state.asStateFlow()*/
-    private val _libroState = MutableStateFlow<List<LibroItem>>(emptyList())
-    val libroState: StateFlow<List<LibroItem>> = _libroState
+
+    private val _libroState = MutableStateFlow<UIState>(UIState())
+    val libroState: StateFlow<UIState> = _libroState
 
 
     init {
         viewModelScope.launch {
+            _libroState.update {it.copy(_loading = true)}
             val response =  libroRepository.getAll()
-            _libroState.value = response
-            /*_state.update { it.copy(_loading = true) }
-            libroRepository.getAll()
-                .onSuccess {
-                    _state.update {
-                        it.copy(listLibro = it.listLibro)
-                    }
-                }.
-                onFailure {
-                    println()
-                }
-            _state.update { it.copy(_loading = false) }*/
+            _libroState.update { it.copy(listLibro=response) }
+            _libroState.update {it.copy(_loading = false)}
         }
     }
 

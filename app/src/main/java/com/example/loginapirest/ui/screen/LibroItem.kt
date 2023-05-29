@@ -23,11 +23,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavController
 import com.example.loginapirest.ui.model.LibroItem
 
 
 @Composable
-fun LibroItem(libroItem : LibroItem) {
+fun LibroItem(libroItem : LibroItem,navController: NavController) {
     val context = LocalContext.current
     Card(
         modifier = Modifier
@@ -50,6 +51,7 @@ fun LibroItem(libroItem : LibroItem) {
                         .fillMaxHeight()
                         .weight(0.8f)
                         .clickable {
+                           // navController.navigate()
                             Toast.makeText(context, "Click,soy el libro ${libroItem.nombre} ", Toast.LENGTH_SHORT).show()
                          }
 
