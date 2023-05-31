@@ -37,7 +37,6 @@ class LoginModel : ViewModel() {
             val login = repository.fetchData(name,password).getOrDefault(LoginResponse())
             _state.update{it.copy(loginResponse = login)}
             _state.update { it.copy(_loading = false) }
-
         }
     }
 

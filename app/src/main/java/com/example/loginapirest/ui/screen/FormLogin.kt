@@ -125,9 +125,8 @@ fun FormLogin(navController: NavHostController){
     }
     if (isSuccess.value) {
         Log.d("BIENVENIDO","Bienvenido $loginModel.name")
-        //show = true
         SimpleAlertDialog("Bienvenido","Bienvenido $loginModel.name.value") {
-            navController.navigate(route = AppScreen.ListLibroScreen.route)
+            navController.navigate(route = AppScreen.ListLibro.route)
         }
     }
     Column(
