@@ -53,6 +53,7 @@ fun NameField(loginModel: LoginModel) {
         singleLine = true,
         maxLines = 1
     )
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -103,7 +104,7 @@ fun FormLogin(navController: NavHostController){
     //val state = loginModel._state
     val loginModel : LoginModel = viewModel()
     val context = LocalContext.current
-    val state by loginModel._state.collectAsState()
+    val state by loginModel.state.collectAsState()
     val isLoading = remember { mutableStateOf(false) }
     val isSuccess = remember{ mutableStateOf(false) }
     var show by rememberSaveable { mutableStateOf(false) }

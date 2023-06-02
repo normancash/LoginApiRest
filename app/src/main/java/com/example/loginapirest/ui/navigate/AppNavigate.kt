@@ -10,6 +10,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.loginapirest.ui.model.LibroItem
 
 import com.example.loginapirest.ui.screen.FormLogin
@@ -44,11 +45,12 @@ fun AppNavigate() {
             ListLibroScreen (navController)
 
         }
-        composable(route= AppScreen.DetailLibro.route)
+        composable(route= AppScreen.DetailLibro.route + "/{oper}",
+            arguments = listOf(navArgument(name="oper") {type= NavType.StringType}))
         {
             val result = navController.previousBackStackEntry?.savedStateHandle?.get<LibroItem>("item")
             if (result != null) {
-                DetailLibroScreen(navController,result)
+                DetailLibroScreen(navController,result,it.arguments?.getString("oper"))
             }
         }
 

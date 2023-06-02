@@ -89,7 +89,7 @@ fun Libros(state: LibroViewModel.UIState, modifier: Modifier, navController: Nav
             modifier = modifier
         ) {
             itemsIndexed(items = state.listLibro) { index, item ->
-                LibroItem(libroItem = item, navController)
+                LibroItem(libroItem = item, navController,modifier)
                 //Text(text = item.nombre)
             }
         }

@@ -1,6 +1,7 @@
 package com.example.loginapirest.ui.repository
 
 import android.util.Log
+import com.example.loginapirest.ui.model.DtoLibro
 import com.example.loginapirest.ui.model.LibroItem
 import com.example.loginapirest.ui.remote.ApiAdapter
 import com.example.loginapirest.ui.remote.ApiLibro
@@ -22,6 +23,14 @@ class RepositoryLibro( ) {
         return emptyList<LibroItem>()
     }
 
+    suspend fun addLibro(item : DtoLibro)   {
+        try
+        {
+           apiLibro.save(item)
+        } catch (e : Exception) {
+            Log.d("ERROR",e.message.toString())
+        }
+    }
 
 
 }
