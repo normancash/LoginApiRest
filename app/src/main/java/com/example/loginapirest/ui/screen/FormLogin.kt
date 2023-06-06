@@ -35,7 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.loginapirest.R
-import com.example.loginapirest.ui.activity.SimpleAlertDialog
+import com.example.loginapirest.ui.config.DataStoreManager
+import com.example.loginapirest.ui.config.SimpleAlertDialog
 import com.example.loginapirest.ui.viewmodel.LoginModel
 import com.example.loginapirest.ui.navigate.AppScreen
 
@@ -109,11 +110,18 @@ fun FormLogin(navController: NavHostController){
     val isSuccess = remember{ mutableStateOf(false) }
     var show by rememberSaveable { mutableStateOf(false) }
 
+
+    // datastore Email
+    val dataStore = DataStoreManager(context)
+    // get saved email
+    val savedEmail = dataStore.getValue.collectAsState(initial = "")
+    Log.d("SAVED EMAIL",savedEmail.value.toString())
     LaunchedEffect(state) {
         isLoading.value = state._loading
         Log.d("LOADING",isLoading.toString())
         isSuccess.value = state.loginResponse.success
         Log.d("SUCCESS",isSuccess.toString())
+        dataStore.saveEmail(state.loginResponse.msg)
     }
 
     if (isLoading.value) {
@@ -129,6 +137,7 @@ fun FormLogin(navController: NavHostController){
         SimpleAlertDialog("Bienvenido","Bienvenido $loginModel.name.value") {
             navController.navigate(route = AppScreen.ListLibro.route)
         }
+
     }
     Column(
         modifier = Modifier.fillMaxSize()

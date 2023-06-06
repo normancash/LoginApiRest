@@ -1,4 +1,4 @@
-package com.example.loginapirest.ui.activity
+package com.example.loginapirest.ui.config
 
 import android.util.Log
 import androidx.compose.material3.AlertDialog
