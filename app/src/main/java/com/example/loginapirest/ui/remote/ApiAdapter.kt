@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiAdapter{
 
-    val BASE_URL = "http://192.168.40.100:8181"
+    val BASE_URL = "http://192.168.0.6:8181"
 
     fun getInstance(): Retrofit {
          return Retrofit.Builder().baseUrl(BASE_URL)

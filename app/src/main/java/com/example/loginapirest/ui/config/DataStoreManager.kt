@@ -12,17 +12,17 @@ import kotlinx.coroutines.flow.map
 class DataStoreManager(private val context: Context) {
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("DATA_ITEM")
-        val DATA_KEY = stringPreferencesKey("")
+        val DATA_KEY = stringPreferencesKey("VALUE_SAVE")
     }
 
-    // to get the email
+    // to get the value
     val getValue: Flow<String?> = context.dataStore.data
         .map { preferences ->
             preferences[DATA_KEY] ?: ""
         }
 
-    // to save the email
-    suspend fun saveEmail(name: String) {
+    // to save the value
+    suspend fun saveValue(name: String) {
         context.dataStore.edit { preferences ->
             preferences[DATA_KEY] = name
         }

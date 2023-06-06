@@ -114,15 +114,16 @@ fun FormLogin(navController: NavHostController){
     // datastore Email
     val dataStore = DataStoreManager(context)
     // get saved email
-    val savedEmail = dataStore.getValue.collectAsState(initial = "")
-    Log.d("SAVED EMAIL",savedEmail.value.toString())
+
     LaunchedEffect(state) {
         isLoading.value = state._loading
         Log.d("LOADING",isLoading.toString())
         isSuccess.value = state.loginResponse.success
         Log.d("SUCCESS",isSuccess.toString())
-        dataStore.saveEmail(state.loginResponse.msg)
+        //dataStore.saveValue(state.loginResponse.msg)
+        dataStore.saveValue("Hola soy Synthia")
     }
+
 
     if (isLoading.value) {
         Box(

@@ -1,5 +1,6 @@
 package com.example.loginapirest.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,11 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.example.loginapirest.R
+import com.example.loginapirest.ui.config.DataStoreManager
 import com.example.loginapirest.ui.model.LibroItem
 import com.example.loginapirest.ui.navigate.AppScreen
 
@@ -32,6 +35,9 @@ import com.example.loginapirest.ui.navigate.AppScreen
 @Composable
 fun LibroItem(libroItem: LibroItem, navController: NavController, modifier: Modifier) {
     val context = LocalContext.current
+    val dataStore = DataStoreManager(context)
+    val savedValue = dataStore.getValue.collectAsState(initial = "")
+    Log.d("SAVED VALUE",savedValue.value.toString())
     Card(
         modifier = Modifier
             .padding(8.dp, 4.dp)
